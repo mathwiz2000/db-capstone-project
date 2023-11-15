@@ -76,9 +76,11 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`MenuItem` (
   `MenuItemID` INT NOT NULL,
-  `Name` VARCHAR(200) NULL,
-  `Type` VARCHAR(100) NULL,
-  `Price` DECIMAL NULL,
+  `Course` VARCHAR(255) NULL,
+  `Starter` VARCHAR(255) NULL,
+  `Desert` VARCHAR(255) NULL,
+  `Drink` VARCHAR(255) NULL,
+  `Sides` VARCHAR(45) NULL,
   PRIMARY KEY (`MenuItemID`))
 ENGINE = InnoDB;
 
