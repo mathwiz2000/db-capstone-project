@@ -106,7 +106,7 @@ ENGINE = InnoDB;
 -- Table `mydb`.`Orders`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Orders` (
-  `OrderID` VARCHAR(45) NOT NULL,
+  `OrderID` INT NOT NULL,
   `OrderDate` DATE NULL,
   `Quantity` DECIMAL NULL,
   `Cost` DECIMAL NULL,
@@ -136,7 +136,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`OrderDelivery` (
   `DeliveryID` INT NOT NULL,
-  `OrderID` VARCHAR(45) NULL,
+  `OrderID` INT NULL,
   `DeliveryDate` DATE NULL,
   `Status` TINYINT NULL,
   PRIMARY KEY (`DeliveryID`),
