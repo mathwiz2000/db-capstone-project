@@ -1,0 +1,18 @@
+// Task 1
+
+CREATE VIEW OrdersView as
+	select OrderID,Quantity,Cost where Quantity>2;
+	
+// Task 2
+
+select c.CustomerID,c.Name,o.OrderID,o.Cost,mi.Starter,mi.Course from
+Customers c, Orders o, Menu m, MenuItem mi where
+c.CustomerID=o.CustomerID and o.MenuID=m.MenuID and m.MenuItemID=mi.MenuItemID;
+
+// Task 3	
+
+select Course from 
+(
+select Course,m.Cuisine as Cuisine,m.MenuItemID as MMID,count(o.OrderID) as c  from
+Orders o, Menu m, MenuItem mi where o.MenuID=m.MenuID and m.MenuItemID=mi.MenuItemID 
+group by Cuisine,MMID having c>2) as SubQuery group by Course;

@@ -1,0 +1,40 @@
+
+//Task 1
+
+delimiter //
+
+create procedure AddBooking(in bid int, in cid int,in tableid int, in bdate date)
+begin
+    insert into Bookings (BookingID,BookingDate,TableNumber,CustomerID) values
+		(bid,bdate,tableid,cid);
+end//
+delimiter ;
+
+call AddBooking(9,3,4,'2022-12-30');
+
+--------------------------------------------------
+// Task 2
+
+delimiter //
+
+create procedure UpdateBooking(in bid int, in bdate date)
+begin
+    update Bookings set BookingDate=bdate where BookingId=bid;
+end//
+delimiter ;
+
+call UpdateBooking(9,'2022-12-31');
+
+--------------------------------------------------
+
+// Task 3
+
+delimiter //
+create procedure CancelBooking(in bid int)
+begin
+	delete from Bookings where BookingID=bid;
+end//
+delimiter ;
+
+call CancelBooking(9);
+

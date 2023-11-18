@@ -1,0 +1,49 @@
+// Task 1
+
+insert into Bookings (BookingID,BookingDate,TableNumber,CustomerID)
+VALUES (1,'2022-10-10',5,1),(2,'2022-11-12',3,3),(3,'2022-10-11',2,2),(4,'2022-10-13',2,1);
+
+
+--------------------------------------------------
+
+// Task 2
+
+drop if exists procedure CheckBooking;
+delimiter //
+
+create procedure CheckBooking(in bdate date,in tableid int)
+begin
+	if ((select BookingID from Bookings where BookingDate=bdate and TableNumber=tableid)<>0) then
+		select concat('Table ',tableid,' is already booked')  as 'Booking Status';
+    else
+		select concat('Table ',tableid,' is available') as 'Booking Status';
+    end if;
+end//
+delimiter ;
+
+call CheckBooking('2022-11-12',3);
+
+-----------------------------------------------------
+
+//Task 3
+
+drop procedure AddValidBooking;
+delimiter //
+
+create procedure AddValidBooking(in bdate date,in tableid int, in customerid int)
+begin
+	declare bid int;
+	start transaction;
+    select max(BookingID+1) from Bookings into bid;
+    insert into Bookings (BookingID,BookingDate,TableNumber,CustomerID) values
+		(bid,bdate,tableid,customerid);
+	if ((select count(BookingID) from Bookings where BookingDate=bdate and TableNumber=tableid)>1) then
+		rollback;
+    else
+		commit;
+    end if;
+end//
+delimiter ;
+
+call AddValidBooking('2022-11-17',6,1);
+
